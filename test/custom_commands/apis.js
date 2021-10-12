@@ -40,6 +40,10 @@ module.exports = browser => {
                 });
             });
         });
+        browser.homePage_Open()
+        browser.homePage_displayTableFilteredByNameModifyingURL(name)
+        browser.homePage_selectFirstComputerInTable()
+        browser.homePage_addElementToListOfIDsTOBeCleanedUp()
         return getPostResponse
     });
 

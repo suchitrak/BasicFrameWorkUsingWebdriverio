@@ -35,7 +35,7 @@ exports.config = {
         browserName: 'chrome',
         acceptInsecureCerts: true
     }],
-    logLevel: 'info',
+    logLevel: 'debug',
     baseUrl: 'http://computer-database.herokuapp.com/computers',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
@@ -61,7 +61,7 @@ exports.config = {
         listOfCompanies: []
     },
     connectionRetryCount: 3,
-    services: ['chromedriver', 'devtools'],
+    services: ['chromedriver'],
     
     framework: 'mocha',
     reporters: ['spec'],
@@ -77,7 +77,6 @@ exports.config = {
         ApiCommands(browser)
         CreatePageCommands(browser)
         browserObject = browser;
-        utilMethods()
     },
     beforeSuite() {
         browser.commonCRUDPage_getAllCompanies()

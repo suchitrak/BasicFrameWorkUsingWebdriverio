@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:all": "npx wdio run ./wdio.conf.js",
+    "test:create": "npx wdio run ./wdio.conf.js --suite create",
+    "test:delete": "npx wdio run ./wdio.conf.js --suite delete",
+    "test:updateReplace": "npx wdio run ./wdio.conf.js --suite updateReplace",
+    "test:api": "npx wdio run ./wdio.conf.js --suite api"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,17 @@
   "bugs": {
     "url": "https://github.com/suchitrak/BasicFrameWorkUsingWebdriverio/issues"
   },
-  "homepage": "https://github.com/suchitrak/BasicFrameWorkUsingWebdriverio#readme"
+  "homepage": "https://github.com/suchitrak/BasicFrameWorkUsingWebdriverio#readme",
+  "dependencies": {
+    "@wdio/cli": "^7.14.1",
+    "@wdio/logger": "^7.7.0"
+  },
+  "devDependencies": {
+    "@wdio/local-runner": "^7.14.1",
+    "@wdio/mocha-framework": "^7.14.1",
+    "@wdio/spec-reporter": "^7.14.1",
+    "@wdio/sync": "^7.14.1",
+    "chromedriver": "^94.0.0",
+    "wdio-chromedriver-service": "^7.2.2"
+  }
 }
