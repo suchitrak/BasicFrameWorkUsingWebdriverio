@@ -6,7 +6,7 @@ module.exports = browser => {
      * @param {string} log - text to be logged
      * @param {string} logLevel - loglevel
      *          Possible values - trace, debug, info, warn, error
-     *          Optional param. If no value is passed for logLevel, Default value will be - debug
+     *          Optional param. If no value is passed for logLevel, Default value will be - info
      *
      */
     browser.addCommand('log', (logText, logLevel = 'info') => {

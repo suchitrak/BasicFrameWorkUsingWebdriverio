@@ -27,7 +27,7 @@ module.exports = browser => {
      */
     browser.addCommand('getComputerIDFromUrl', () => {
         var URL = browser.getUrl()
-        console.log(`${URL} of ID created is ${URL.split("/").slice(-1)[0]}`)
+        browser.log(`${URL} of ID created is ${URL.split("/").slice(-1)[0]}`)
         return URL.split("/").slice(-1)[0] 
     });
 
@@ -37,7 +37,7 @@ module.exports = browser => {
      * @returns nothing 
      */
     browser.addCommand('navigateToUrl', (path="") => {
-        console.log(`Navigating to URL ${browser.config.baseUrl}${path}`)
+        browser.log(`Navigating to URL ${browser.config.baseUrl}${path}`)
         browser.url(`${browser.config.baseUrl}${path}`)
         browser.waitTillPageIsLoaded(browser.config.baseUrl + path)
     });

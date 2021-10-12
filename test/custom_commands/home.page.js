@@ -19,7 +19,8 @@ module.exports = browser => {
         paginationNext: '.next',
         paginationPrev: '.prev',
         nothingToDisplay: '.well em',
-        rowsInTable: 'table tbody tr'
+        rowsInTable: 'table tbody tr',
+        tableHeaders: '.computers thead tr th'
     }
     /**
      * @Definition Navigates to http://computer-database.herokuapp.com/computers page
@@ -45,9 +46,9 @@ module.exports = browser => {
      * @returns nothing 
      */
     browser.addCommand('homePage_searchForComputer', computerName => {
-        selectors.waitForDisplayed(browser.config.elementTimeoutWait)
-        selectors.searchbox.setValue(computerName);
-        selectors.searchsubmit.click();
+        $(selectors.searchbox).waitForDisplayed(browser.config.elementTimeoutWait)
+        $(selectors.searchbox).setValue(computerName);
+        $(selectors.searchsubmit).click();
     });
 
     /**
@@ -63,10 +64,15 @@ module.exports = browser => {
      * @returns nothing 
      */
     browser.addCommand('homePage_areTheContentsOfThePageCorrectlyDisplayed', () => {
-        selectors.forEach((selector) => {
-            console.log(selector);
-            expect($(selector).exists()).toBe(true);
-        });
+        expect($(selectors.searchbox).isExisting()).toBe(true); 
+        expect($(selectors.searchsubmit).isExisting()).toBe(true); 
+        expect($(selectors.addANewComputer).isExisting()).toBe(true); 
+        expect($(selectors.header).isExisting()).toBe(true);  
+        expect($(selectors.paginationCurrent).isExisting()).toBe(true); 
+        expect($(selectors.paginationNext).isExisting()).toBe(true); 
+        expect($(selectors.paginationPrev).isExisting()).toBe(true); 
+        expect($(selectors.rowsInTable).isExisting()).toBe(true); 
+        expect($$(selectors.tableHeaders).length).toEqual(4)
     });
 
     /**

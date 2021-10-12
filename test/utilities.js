@@ -1,3 +1,7 @@
+/*
+Contains all the utility methods used to generate different kinds of strings that can be used as test data
+*/
+
 function generateRandomString(characters, length) {
     let result = '';
     const charactersLength = characters.length;
@@ -26,8 +30,8 @@ const utilMethods = {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         return generateRandomString(characters, length)
     },
-    utils_generateRandomSpecialCharsString(length = 3) {
-        const characters = '!@#+-_=:'
+    utils_generateRandomSpecialCharsString(length = 4) {
+        const characters = '!@#^%$*'
         return generateRandomString(characters, length)
     },
     utils_getRandomCompanyIndex() {       

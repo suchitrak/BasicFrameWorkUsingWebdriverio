@@ -1,9 +1,4 @@
-const HomePage = require('../pageobjects/home.page');
-// const AddPage = require('../pageobjects/computer.page');
-// const DeletePage = require('../pageobjects/delete.page');
-
-
-describe('CRUD Operations', () => {
+describe('Home Page Display', () => {
     it(`Should display Pagination as expected`, () => {
         browser.homePage_Open()
         const [text, href] = browser.homePage_getPaginationPrev()

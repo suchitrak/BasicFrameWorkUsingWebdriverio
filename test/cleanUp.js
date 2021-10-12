@@ -4,8 +4,8 @@ const log = logger(__filename);
 
 const cleanUpFunctions = {
     cleanUp(browser) {
-
         if (browser.config.additional.resources.cleanUpOnExit) {
+            browser.log(`Total Number of computers created = ${browser.config.additional.resources.computerIdsCreated.length}`)
             browser.config.additional.resources.computerIdsCreated.forEach(computerID => {
                 browser.log(`Deleting the computer IDs created during test Automation as part of clean up ${computerID}`, "debug");
                 browser.api_deleteComputer(`/${computerID}/delete`);

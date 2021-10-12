@@ -8,7 +8,8 @@
     "test:create": "npx wdio run ./wdio.conf.js --suite create",
     "test:delete": "npx wdio run ./wdio.conf.js --suite delete",
     "test:updateReplace": "npx wdio run ./wdio.conf.js --suite updateReplace",
-    "test:api": "npx wdio run ./wdio.conf.js --suite api"
+    "test:api": "npx wdio run ./wdio.conf.js --suite api",
+    "test:homePageDisplay": "npx wdio run ./wdio.conf.js --suite homePageDisplay"
   },
   "repository": {
     "type": "git",

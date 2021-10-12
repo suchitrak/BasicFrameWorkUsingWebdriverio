@@ -71,26 +71,36 @@ const createComputerInputs = [
         expectedDiscontinuedValue: '01 Sep 1982',
         expectedCompanyValue: 2
     },
-    // {
-    //     testName: 'existing name all other fields empty',
-    //     name: 'existing',
-    //     introduced: '',
-    //     discontinued: '',
-    //     company: '',
-    //     expectedIntroducedValue: '-',
-    //     expectedDiscontinuedValue: '-',
-    //     expectedCompanyValue: '-'
-    //   },
-    //   {
-    //     testName: 'existing name and all other fields exactly the sames',
-    //     name: 'existing',
-    //     introduced: '1982-09-01',
-    //     discontinued: '1982-09-01',
-    //     company: 2,
-    //     expectedIntroducedValue: '01 Sep 1982',
-    //     expectedDiscontinuedValue: '01 Sep 1982',
-    //     expectedCompanyValue: 2
-    // },
+    {
+        testName: 'all field provided and spaces added as suffix and prefix of name field',
+        name: `    ${utilMethods.utils_generateRandomAlphaNumericString()}     `,
+        introduced: '1982-09-01',
+        discontinued: '1982-09-01',
+        company: 2,
+        expectedIntroducedValue: '01 Sep 1982',
+        expectedDiscontinuedValue: '01 Sep 1982',
+        expectedCompanyValue: 2
+    },
+    {
+        testName: 'all field provided and name contains multiple words',
+        name: `${utilMethods.utils_generateRandomAlphaNumericString()} ${utilMethods.utils_generateRandomAlphaNumericString()} ${utilMethods.utils_generateRandomAlphaNumericString()}`,
+        introduced: '1982-09-01',
+        discontinued: '1982-09-01',
+        company: 2,
+        expectedIntroducedValue: '01 Sep 1982',
+        expectedDiscontinuedValue: '01 Sep 1982',
+        expectedCompanyValue: 2
+    },
+    {
+        testName: 'all field provided and name contains urls',
+        name: `http://wwww.${utilMethods.utils_generateRandomAlphaNumericString()}.com`,
+        introduced: '1982-09-01',
+        discontinued: '1982-09-01',
+        company: 2,
+        expectedIntroducedValue: '01 Sep 1982',
+        expectedDiscontinuedValue: '01 Sep 1982',
+        expectedCompanyValue: 2
+    },
   ];
 
   const createComputerInputsInvalid = [
@@ -109,6 +119,14 @@ const createComputerInputs = [
         discontinued: '1982-09-01',
         company: 4,
         errorDisplayedOn: "name"
+    },
+    {
+        testName: 'Empty Name field',
+        name: utilMethods.utils_generateRandomAlphaString(),
+        introduced: '   1982-09-01   ',
+        discontinued: '1982-09-01',
+        company: 4,
+        errorDisplayedOn: "introduced"
     },
     {
         testName: 'Invalid Introduced Field',
@@ -142,11 +160,11 @@ describe('CRUD Operations - Create', () => {
             expect(browser.createPage_getHeaderOnCreatePage() === "Add a computer").toBe(true)
             browser.createPage_displayedAsExpected()
             browser.createPage_fillAndSubmitCreateUserForm(name,introduced,discontinued,company)
-            expect(browser.homePage_getAlertMessage() === `Done! Computer ${name} has been created`).toBe(true)
-            browser.homePage_displayTableFilteredByNameModifyingURL(name)
-            expect(browser.homePage_getFirstComputerInTable() === name).toBe(true)
+            expect(browser.homePage_getAlertMessage()).toEqual(`Done! Computer ${name.trim()} has been created`)
+            browser.homePage_searchForComputer(name)
+            expect(browser.homePage_getFirstComputerInTable()).toEqual(name.trim())
             const [nameres, introducedres, discontinuedres, companyres] = browser.homePage_getValuesCorrespondingToComputerInATable(name)
-            expect(nameres === name).toBe(true)
+            expect(nameres === name.trim()).toBe(true)
             expect(introducedres).toEqual(input.expectedIntroducedValue)
             expect(discontinuedres).toEqual(input.expectedDiscontinuedValue)
             if(input.expectedCompanyValue != '-'){
@@ -218,7 +236,40 @@ describe('CRUD Operations - Create', () => {
         expect(browser.homePage_getNumberOfRowsInTable()).toEqual(numberOfTestIterations)
     });
 
+    it(`Should be able to create same computer name from two different tabs`, () => {
+        browser.homePage_Open()
+        var name = utilMethods.utils_generateRandomAlphaNumericString();
+        var introduced = '1982-09-01';
+        var discontinued = '1982-09-01';
+        var company = 2;
+        var numberOfTestIterations = 2
+        
+        browser.newWindow(browser.config.baseUrl)
+        var firstWindow = browser.getWindowHandle()
+        browser.newWindow(browser.config.baseUrl)
+        var secondWindow = browser.getWindowHandle()
+        browser.homePage_Open()
+        browser.homePage_clickaddNewComputer()
+        browser.createPage_getHeaderOnCreatePage()
+        browser.createPage_fillAndSubmitCreateUserForm(name,introduced,discontinued,company)
+        expect(browser.homePage_getAlertMessage() === `Done! Computer ${name} has been created`).toBe(true)
+        browser.homePage_displayTableFilteredByNameModifyingURL(name)
+        browser.homePage_selectFirstComputerInTable()
+        browser.homePage_addElementToListOfIDsTOBeCleanedUp()
 
+        browser.switchToWindow(firstWindow)
+        browser.homePage_Open()
+        browser.homePage_clickaddNewComputer()
+        browser.createPage_getHeaderOnCreatePage()
+        browser.createPage_fillAndSubmitCreateUserForm(name,introduced,discontinued,company)
+        expect(browser.homePage_getAlertMessage() === `Done! Computer ${name} has been created`).toBe(true)
+        browser.homePage_displayTableFilteredByNameModifyingURL(name)
+        browser.homePage_selectFirstComputerInTable()
+        browser.homePage_addElementToListOfIDsTOBeCleanedUp()
 
+        browser.homePage_Open()
+        browser.homePage_displayTableFilteredByNameModifyingURL(name)
+        expect(browser.homePage_getNumberOfRowsInTable()).toEqual(numberOfTestIterations)
+    });
 })
 

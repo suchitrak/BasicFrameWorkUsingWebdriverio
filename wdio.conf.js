@@ -25,8 +25,8 @@ exports.config = {
         delete: [
             './test/specs/deleteTests.js'
         ],
-        security: [
-            './test/specs/basicSecurityTests.js'
+        homePageDisplay: [
+            './test/specs/homePageDisplayTests.js'
         ]
     },
     maxInstances: 10,
@@ -35,7 +35,7 @@ exports.config = {
         browserName: 'chrome',
         acceptInsecureCerts: true
     }],
-    logLevel: 'debug',
+    logLevel: 'error',
     baseUrl: 'http://computer-database.herokuapp.com/computers',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
@@ -83,5 +83,10 @@ exports.config = {
     after() {
         cleanUp(browserObject);
     },
-    
+
+    afterTest(test, context, result) {
+        if (result.error) {
+            browser.saveScreenshot(`target/reports/${test}-Onfailure.png`);
+        }
+    }
 }

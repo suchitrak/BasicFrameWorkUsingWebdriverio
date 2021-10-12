@@ -131,7 +131,7 @@ const updateComputerInputs = [
   ];
 
 
-describe('CRUD Operations', () => {
+describe('CRUD Operations - Update and Replace', () => {
     updateComputerInputs.forEach(function (input) {
         var testName = input.testName 
         var name = input.name 
@@ -145,7 +145,9 @@ describe('CRUD Operations', () => {
         var expectedCompanyValue = input.expectedCompanyValue 
         it(`Should be able to ${testName}`, () => {
             browser.api_createComputer(name, introduced, discontinued, company)
-            browser.homePage_displayTableFilteredByNameModifyingURL(name)
+            // browser.homePage_displayTableFilteredByNameModifyingURL(name)
+            browser.homePage_Open()
+            browser.homePage_searchForComputer(name)
             browser.homePage_selectFirstComputerInTable()
             browser.homePage_addElementToListOfIDsTOBeCleanedUp()
             if(updateField == "introduced"){
@@ -162,7 +164,8 @@ describe('CRUD Operations', () => {
                 browser.editDeletePage_fillAndSubmitUpdateComputerForm(updateValue, "", "","")
                 name = updateValue
             }
-            browser.homePage_displayTableFilteredByNameModifyingURL(name)
+            // browser.homePage_displayTableFilteredByNameModifyingURL(name)
+            browser.homePage_searchForComputer(name)
             const [nameres, introducedres, discontinuedres, companyres] = browser.homePage_getValuesCorrespondingToComputerInATable(name)
             expect(nameres).toEqual(name)
             expect(introducedres).toEqual(expectedIntroducedValue)

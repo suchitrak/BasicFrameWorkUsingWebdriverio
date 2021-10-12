@@ -23,7 +23,7 @@ module.exports = browser => {
      */
     browser.addCommand('editDeletePage_displayedAsExpected', () => {
         for (selector in selectors) {
-            console.log(`Checking if selector ${selectors[selector]} exixts`);
+            console.log(`Checking if selector ${selectors[selector]} exists`);
             expect($(selectors[selector]).isExisting()).toBe(true);
         };
     });
