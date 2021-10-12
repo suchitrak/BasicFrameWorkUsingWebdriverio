@@ -79,7 +79,7 @@ yarn test:api
 Has 1 test and takes 3s to execute
 
 ## Improvements that could be made to the framework
-1. Add a html parser. So the response from the API could be parsed and list of companies and details of existing computers could be stored as part of test data. 
+1. Add a html parser. So the response from the API could be parsed and list of companies and details of existing computers could be stored as part of test data. Also add unit tests for the html parser
 2. Add more P3,P4 Tests
 3. lint needs to be added
 4. Can be made an Async framework
