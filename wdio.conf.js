@@ -86,7 +86,7 @@ exports.config = {
 
     afterTest(test, context, result) {
         if (result.error) {
-            browser.saveScreenshot(`target/reports/${test}-Onfailure.png`);
+            browser.saveScreenshot(`./Onfailure.png`);
         }
     }
 }

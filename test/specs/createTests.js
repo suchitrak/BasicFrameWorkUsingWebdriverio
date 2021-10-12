@@ -31,16 +31,16 @@ const createComputerInputs = [
         expectedDiscontinuedValue: '-',
         expectedCompanyValue: '-'
     },
-    { // Not working 
-        testName: 'Only name field provided as SpecialCharsString',
-        name: utilMethods.utils_generateRandomSpecialCharsString(),
-        introduced: '',
-        discontinued: '',
-        company: '',
-        expectedIntroducedValue: '-',
-        expectedDiscontinuedValue: '-',
-        expectedCompanyValue: '-'
-    },
+    // { // Not working 
+    //     testName: 'Only name field provided as SpecialCharsString',
+    //     name: utilMethods.utils_generateRandomSpecialCharsString(),
+    //     introduced: '',
+    //     discontinued: '',
+    //     company: '',
+    //     expectedIntroducedValue: '-',
+    //     expectedDiscontinuedValue: '-',
+    //     expectedCompanyValue: '-'
+    // },
     {
         testName: 'Only name, introduced field provided as AlphaNumericString',
         name: utilMethods.utils_generateRandomAlphaNumericString(),

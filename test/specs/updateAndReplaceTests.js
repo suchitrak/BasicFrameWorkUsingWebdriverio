@@ -114,20 +114,6 @@ const updateComputerInputs = [
         expectedDiscontinuedValue: '-',
         expectedCompanyValue: 4
       },
-      {
-        testName: 'Replace computer my updating name for a computer that has existing special characters',
-        name: utilMethods.utils_generateRandomSpecialCharsString(),
-        introduced: '1982-09-01',
-        discontinued: '',
-        company: '',
-        updateField: 'name',
-        updateValue: function() {
-            return this.name + "new";
-          },
-        expectedIntroducedValue: '01 Sep 1982',
-        expectedDiscontinuedValue: '-',
-        expectedCompanyValue: '-'
-      },
   ];
 
 
