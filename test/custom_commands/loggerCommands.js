@@ -1,5 +1,5 @@
 const logger = require('@wdio/logger').default;
-const log = logger(constants.packageName);
+const log = logger("BasicFrameworkTests");
 module.exports = browser => {
     /**
      * Logs are logged, based on the logLevel set in the config.js file

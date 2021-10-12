@@ -4,9 +4,9 @@ const homePageCommands = require('./test/custom_commands/home.page.js');
 const CreatePageCommands = require('./test/custom_commands/create.page.js');
 const ApiCommands = require('./test/custom_commands/apis.js');
 const CommonActions = require('./test/custom_commands/commonActions.page');
+const LoggerCommands = require('./test/custom_commands/loggerCommands.js')
 
 const cleanUp  = require('./test/cleanUp.js');
-const {utilMethods} = require('./test/utilities.js')
 let browserObject = '';
 exports.config = {
     specs: [
@@ -40,6 +40,13 @@ exports.config = {
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
 
+    /*
+    Additional parameters used: 
+    1. Timeouts - time to wait for page/element to load
+    2. cleanUpOnExit if set to true, deletes all the resources created during automation
+    3. computerIdsCreated - The ID of a new computer created by automation is added here. The computerIDs created here are deleted on exit
+    4. listOfCompanies is populated at the beginning to get the list of companies that can be used during automation
+    */
     additional : {
         timeOuts : {
             pageLoadTimeout: 5000,
@@ -48,15 +55,6 @@ exports.config = {
         resources: {
             cleanUpOnExit: true,
             computerIdsCreated: [],
-        },
-        apiParameters: {
-            requestBodyContentType: {
-                urlencoded: "x-www-form-urlencoded",
-            },
-            getOrPost: {
-                post: "POST",
-                get: "GET",
-            }
         },
         listOfCompanies: []
     },
@@ -77,6 +75,7 @@ exports.config = {
         ApiCommands(browser)
         CreatePageCommands(browser)
         browserObject = browser;
+        LoggerCommands(browser)
     },
     beforeSuite() {
         browser.commonCRUDPage_getAllCompanies()
